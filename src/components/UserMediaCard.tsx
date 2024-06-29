@@ -24,6 +24,46 @@ export default function UserMediaCard() {
                 className="object-cover rounded-md"
               />
             </div>
+            <div className="relative w-1/5 h-24">
+              <Image
+                src={"/demo.jpg"}
+                alt=""
+                fill
+                className="object-cover rounded-md"
+              />
+            </div>
+            <div className="relative w-1/5 h-24">
+              <Image
+                src={"/demo.jpg"}
+                alt=""
+                fill
+                className="object-cover rounded-md"
+              />
+            </div>
+            <div className="relative w-1/5 h-24">
+              <Image
+                src={"/demo.jpg"}
+                alt=""
+                fill
+                className="object-cover rounded-md"
+              />
+            </div>
+            <div className="relative w-1/5 h-24">
+              <Image
+                src={"/demo.jpg"}
+                alt=""
+                fill
+                className="object-cover rounded-md"
+              />
+            </div>
+            <div className="relative w-1/5 h-24">
+              <Image
+                src={"/demo.jpg"}
+                alt=""
+                fill
+                className="object-cover rounded-md"
+              />
+            </div>
           {/* ))
         : "No media found!"} */}
     </div>
