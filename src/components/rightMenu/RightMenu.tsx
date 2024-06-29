@@ -3,15 +3,22 @@ import FriendRequests from "./FriendRequests";
 import Birthday from "./Birthday";
 import Ad from "../Ad";
 import UserInfoCard from "../UserInfoCard";
+import UserMediaCard from "../UserMediaCard";
 
-const RightMenu = () => {
+const RightMenu = ({ userId }: { userId?: string }) => {
   return (
     <>
       <div className="flex flex-col gap-2">
+        {userId ? (
+          <>
+            <UserInfoCard />
+            <UserMediaCard />
+          </>
+        ) : null}
         <FriendRequests />
         <Birthday />
-        <Ad size="md"/>
-        <UserInfoCard/>
+        <Ad size="md" />
+        <UserInfoCard />
       </div>
     </>
   );
