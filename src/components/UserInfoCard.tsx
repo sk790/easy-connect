@@ -109,10 +109,10 @@ export default async function UserInfoCard({ user }: { user?: User }) {
         </div>
         {currentUserId && currentUserId !== user.id && (
           <UserInfoCardInteraction
-          // userId={user.Id}
-          // isUserBlocked={isUserBlocked}
-          // isFollowing={isFollowing}
-          // isFollowingSent={isFollowingSent}
+          userId={user.Id}
+          isUserBlocked={isUserBlocked}
+          isFollowing={isFollowing}
+          isFollowingSent={isFollowingSent}
           />
         )}
       </div>
