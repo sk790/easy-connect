@@ -76,20 +76,24 @@ model Like {
 
 model Follower {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  Id          String   @unique
   createdAt   DateTime @default(now())
-  follower    User     @relation("UserFollowers", fields: [followerId], references: [id], onDelete: Cascade)
-  followerId  String   @db.ObjectId
-  following   User     @relation("UserFollowings", fields: [followingId], references: [id], onDelete: Cascade)
-  followingId String   @db.ObjectId
+  follower    User     @relation("UserFollowers", fields: [followerId], references: [Id], onDelete: Cascade)
+  followerId  String
+  following   User     @relation("UserFollowings", fields: [followingId], references: [Id], onDelete: Cascade)
+  followingId String
+
+  @@unique([followerId, followingId])
 }
 
 model FollowRequest {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  Id         String   @unique
   createdAt  DateTime @default(now())
-  sender     User     @relation("FollowRequestsSent", fields: [senderId], references: [id], onDelete: Cascade)
-  senderId   String   @db.ObjectId
-  receiver   User     @relation("FollowRequestsReceived", fields: [receiverId], references: [id], onDelete: Cascade)
-  receiverId String   @db.ObjectId
+  sender     User     @relation("FollowRequestsSent", fields: [senderId], references: [Id], onDelete: Cascade)
+  senderId   String
+  receiver   User     @relation("FollowRequestsReceived", fields: [receiverId], references: [Id], onDelete: Cascade)
+  receiverId String
 
   @@unique([senderId, receiverId])
 }
@@ -99,9 +103,9 @@ model Block {
   Id        String   @unique
   createdAt DateTime @default(now())
   blocker   User     @relation("BlocksSent", fields: [blockerId], references: [Id], onDelete: Cascade)
-  blockerId String   
+  blockerId String
   blocked   User     @relation("BlocksReceived", fields: [blockedId], references: [Id], onDelete: Cascade)
-  blockedId String   
+  blockedId String
 
   @@unique([blockerId, blockedId])
 }
