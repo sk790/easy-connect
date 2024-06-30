@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 const AddPost = () => {
+
   return (
     <div className="p-4 bg-white shadow-md rounded-lg flex gap-4 justify-between text-sm">
       <Image
@@ -12,7 +13,7 @@ const AddPost = () => {
       />
       <div className="flex-1">
         {/* TEXT INPUT */}
-        <form className="flex gap-4">
+        <form action="" className="flex gap-4">
           <textarea
             placeholder="What's on your mind?"
             className="flex-1 bg-slate-100 rounded-lg p-2"
