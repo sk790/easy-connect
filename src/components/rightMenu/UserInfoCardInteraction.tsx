@@ -1,6 +1,5 @@
 "use client";
 import { blockUser, switchFollow } from "@/lib/actions";
-import { auth } from "@clerk/nextjs/server";
 import React, { useOptimistic, useState } from "react";
 
 export default function UserInfoCardInteraction({
@@ -55,10 +54,8 @@ export default function UserInfoCardInteraction({
       console.log(error);
     }
   };
-  // const { userId: currentUserId } = auth();
   return (
     <>
-      {/* {userId !== currentUserId && ( */}
       <>
         <form action={follow}>
           <button className="w-full bg-blue-500 text-white text-sm rounded-md p-2">
@@ -77,7 +74,6 @@ export default function UserInfoCardInteraction({
           </button>
         </form>
       </>
-      {/* )} */}
     </>
   );
 }
