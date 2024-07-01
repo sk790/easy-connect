@@ -1,9 +1,24 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
-import FriendRequestList from './FriendRequestList'
+import Link from "next/link";
+import React from "react";
+import FriendRequestList from "./FriendRequestList";
+import { auth } from "@clerk/nextjs/server";
+import prisma from "@/lib/client";
 
-export default function FriendRequests() {
+export default async function FriendRequests() {
+  const { userId } = auth();
+  if (!userId) return null;
+
+  const requests = await prisma.followRequest.findMany({
+    where: {
+      receiverId: userId,
+    },
+    include: {
+      sender: true,
+    },
+  });
+
+  if (requests.length === 0) return null;
+
   return (
     <div className="p-4 bg-white rounded-lg shadow-md text-sm flex flex-col gap-4">
       {/* TOP */}
@@ -14,10 +29,7 @@ export default function FriendRequests() {
         </Link>
       </div>
       {/* USER */}
-      <FriendRequestList/>
-      <FriendRequestList/>
-      <FriendRequestList/>
-      
+      <FriendRequestList requests={requests} />
     </div>
-  )
+  );
 }
