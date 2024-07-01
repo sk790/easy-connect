@@ -35,17 +35,50 @@ export const switchFollow = async (userId: string) => {
             Id: existingFollowRequest.Id,
           },
         });
-      }else{
+      } else {
         await prisma.followRequest.create({
           data: {
             Id: userId,
             senderId: currentUserId,
             receiverId: userId,
           },
-        })
+        });
       }
     }
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const blockUser = async (userId: string) => {
+  const { userId: currentUserId } = auth();
+  if (!currentUserId) {
+    throw new Error("user not logged in");
+  }
+  try {
+    const isBlocked = await prisma.block.findFirst({
+      where: {
+        blockerId: currentUserId,
+        blockedId: userId,
+      },
+    });
+    if (isBlocked) {
+      await prisma.block.delete({
+        where: {
+          Id: isBlocked.Id,
+        },
+      });
+    } else {
+      await prisma.block.create({
+        data: {
+          Id: userId,
+          blockerId: currentUserId,
+          blockedId: userId,
+        },
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error while blocking user");
   }
 };

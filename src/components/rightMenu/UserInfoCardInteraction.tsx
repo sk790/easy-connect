@@ -1,5 +1,5 @@
 "use client";
-import { switchFollow } from "@/lib/actions";
+import { blockUser, switchFollow } from "@/lib/actions";
 import { auth } from "@clerk/nextjs/server";
 import React, { useOptimistic, useState } from "react";
 
@@ -22,7 +22,7 @@ export default function UserInfoCardInteraction({
 
   const follow = async () => {
     try {
-      setOptimisticState("");
+      setOptimisticState("follow");
       await switchFollow(userId);
       setUserState((prev) => ({
         ...prev,
@@ -36,13 +36,25 @@ export default function UserInfoCardInteraction({
   };
   const [optimisticState, setOptimisticState] = useOptimistic(
     userState,
-    (state) => ({
-      ...state,
-      following: state.following && false,
-      followingRequestSent:
-        !state.following && !state.followingRequestSent ? true : false,
-    })
+    (state, value: "follow" | "block") =>
+      value === "follow"
+        ? {
+            ...state,
+            following: state.following && false,
+            followingRequestSent:
+              !state.following && !state.followingRequestSent ? true : false,
+          }
+        : { ...state, blocked: !state.blocked }
   );
+  const block = async () => {
+    try {
+      setOptimisticState("block");
+      await blockUser(userId);
+      setUserState((prev) => ({ ...prev, blocked: !prev.blocked }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
   // const { userId: currentUserId } = auth();
   return (
     <>
@@ -57,10 +69,10 @@ export default function UserInfoCardInteraction({
               : "Follow"}
           </button>
         </form>
-        <form className="self-end ">
+        <form action={block} className="self-end ">
           <button>
             <span className="text-red-400 text-xs cursor-pointer">
-              {userState.blocked ? "Unblock User" : "Block User"}
+              {optimisticState.blocked ? "Unblock User" : "Block User"}
             </span>
           </button>
         </form>
