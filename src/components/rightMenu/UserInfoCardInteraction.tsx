@@ -1,0 +1,71 @@
+"use client";
+import { switchFollow } from "@/lib/actions";
+import { auth } from "@clerk/nextjs/server";
+import React, { useOptimistic, useState } from "react";
+
+export default function UserInfoCardInteraction({
+  userId,
+  isFollowing,
+  isFollowingSent,
+  isUserBlocked,
+}: {
+  userId: string;
+  isFollowing: boolean;
+  isFollowingSent: boolean;
+  isUserBlocked: boolean;
+}) {
+  const [userState, setUserState] = useState({
+    following: isFollowing,
+    blocked: isUserBlocked,
+    followingRequestSent: isFollowingSent,
+  });
+
+  const follow = async () => {
+    try {
+      setOptimisticState("");
+      await switchFollow(userId);
+      setUserState((prev) => ({
+        ...prev,
+        following: prev.following && false,
+        followingRequestSent:
+          !prev.following && !prev.followingRequestSent ? true : false,
+      }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const [optimisticState, setOptimisticState] = useOptimistic(
+    userState,
+    (state) => ({
+      ...state,
+      following: state.following && false,
+      followingRequestSent:
+        !state.following && !state.followingRequestSent ? true : false,
+    })
+  );
+  // const { userId: currentUserId } = auth();
+  return (
+    <>
+      {/* {userId !== currentUserId && ( */}
+      <>
+        <form action={follow}>
+          <button className="w-full bg-blue-500 text-white text-sm rounded-md p-2">
+            {optimisticState.following
+              ? "Following"
+              : optimisticState.followingRequestSent
+              ? "Friend Request Sent"
+              : "Follow"}
+          </button>
+        </form>
+        <form className="self-end ">
+          <button>
+            <span className="text-red-400 text-xs cursor-pointer">
+              {userState.blocked ? "Unblock User" : "Block User"}
+            </span>
+          </button>
+        </form>
+      </>
+      {/* )} */}
+    </>
+  );
+}
