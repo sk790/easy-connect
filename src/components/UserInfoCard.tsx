@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import UserInfoCardInteraction from "./UserInfoCardInteraction";
+import UserInfoCardInteraction from "./rightMenu/UserInfoCardInteraction";
 import { User } from "@prisma/client";
 import { auth } from "@clerk/nextjs/server";
 import UpdateUser from "./rightMenu/UpdateUser";
