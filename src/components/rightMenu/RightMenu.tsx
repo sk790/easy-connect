@@ -2,9 +2,9 @@ import Image from "next/image";
 import FriendRequests from "./FriendRequests";
 import Birthday from "./Birthday";
 import Ad from "../Ad";
-import UserInfoCard from "../UserInfoCard";
-import UserMediaCard from "../UserMediaCard";
+import UserMediaCard from "./UserMediaCard";
 import { User } from "@prisma/client";
+import UserInfoCard from "./UserInfoCard";
 
 const RightMenu = ({ user }: { user?: User }) => {
   return (
