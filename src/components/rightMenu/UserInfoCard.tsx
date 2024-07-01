@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import UserInfoCardInteraction from "./rightMenu/UserInfoCardInteraction";
 import { User } from "@prisma/client";
 import { auth } from "@clerk/nextjs/server";
-import UpdateUser from "./rightMenu/UpdateUser";
 import prisma from "@/lib/client";
+import UpdateUser from "./UpdateUser";
+import UserInfoCardInteraction from "./UserInfoCardInteraction";
 
 export default async function UserInfoCard({ user }: { user?: User }) {
   if (!user) return null;
@@ -107,7 +107,7 @@ export default async function UserInfoCard({ user }: { user?: User }) {
             <span>Joined {formatedDate}</span>
           </div>
         </div>
-        {currentUserId && currentUserId !== user.id && (
+        {(currentUserId && currentUserId !== user.Id) && (
           <UserInfoCardInteraction
           userId={user.Id}
           isUserBlocked={isUserBlocked}
