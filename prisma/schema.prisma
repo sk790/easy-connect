@@ -41,37 +41,40 @@ model User {
 
 model Post {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  Id        String    @unique
   desc      String
   img       String?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String    @db.ObjectId
+  user      User      @relation(fields: [userId], references: [Id], onDelete: Cascade)
+  userId    String    
   comments  Comment[]
   likes     Like[]
 }
 
 model Comment {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  Id        String   @unique
   desc      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String   @db.ObjectId
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [Id], onDelete: Cascade)
+  userId    String   @unique
+  post      Post     @relation(fields: [postId], references: [Id], onDelete: Cascade)
+  postId    String   @unique
   likes     Like[]
 }
 
 model Like {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  Id        String   @unique
   createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String   @db.ObjectId
-  post      Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId    String?  @db.ObjectId
-  comment   Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
-  commentId String?  @db.ObjectId
+  user      User     @relation(fields: [userId], references: [Id], onDelete: Cascade)
+  userId    String   @unique
+  post      Post?    @relation(fields: [postId], references: [Id], onDelete: Cascade)
+  postId    String?  @unique
+  comment   Comment? @relation(fields: [commentId], references: [Id], onDelete: Cascade)
+  commentId String?  @unique
 }
 
 model Follower {
@@ -112,9 +115,10 @@ model Block {
 
 model Story {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  Id        String   @unique
   createdAt DateTime @default(now())
   expiresAt DateTime
   img       String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String   @unique @db.ObjectId
+  user      User     @relation(fields: [userId], references: [Id], onDelete: Cascade)
+  userId    String   @unique 
 }
