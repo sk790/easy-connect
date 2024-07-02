@@ -10,7 +10,7 @@ export default function Navbar() {
           {/* LEFT */}
           <div className="md:hidden lg:block w-[20%]">
             <Link href="/" className="font-bold text-xl text-blue-600">
-              Saurabh Nagar
+              Easy Connect
             </Link>
           </div>
           {/* CENTER */}
