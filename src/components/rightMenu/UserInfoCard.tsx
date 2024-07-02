@@ -65,7 +65,7 @@ export default async function UserInfoCard({ user }: { user?: User }) {
               ? user.name + " " + user.surname
               : user.username}
           </span>
-          <span className="text-sm">@username</span>
+          {/* <span className="text-sm">{}</span> */}
         </div>
         {user.description && <p>{user.description}</p>}
         {<p>description</p>}
