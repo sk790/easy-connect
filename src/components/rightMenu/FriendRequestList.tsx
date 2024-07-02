@@ -1,25 +1,43 @@
-import prisma from "@/lib/client";
-import { auth } from "@clerk/nextjs/server";
+"use client";
+import { acceptFollowRequest, declineFollowRequest } from "@/lib/actions";
 import { FollowRequest, User } from "@prisma/client";
 import Image from "next/image";
-import React from "react";
+import React, { useOptimistic, useState } from "react";
 
 type RequestWithuser = FollowRequest & {
   sender: User;
 };
-export default async function FriendRequestList({
+export default function FriendRequestList({
   requests,
 }: {
   requests: RequestWithuser[];
 }) {
+  const [requestState, setRequestState] = useState(requests);
+
+  const acceptRequest = async (requestId: string, userId: string) => {
+    setOptimisticRequestsState(requestId);
+    try {
+      await acceptFollowRequest(userId);
+      setRequestState((prev) => prev.filter((req) => req.Id !== requestId));
+    } catch (error) {}
+  };
+  const declineRequest = async (requestId: string, userId: string) => {
+    setOptimisticRequestsState(requestId);
+    try {
+      await declineFollowRequest(userId);
+      setRequestState((prev) => prev.filter((req) => req.Id !== requestId));
+    } catch (error) {}
+  };
+
+  const [optimisticRequestsState, setOptimisticRequestsState] = useOptimistic(
+    requestState,
+    (state, value: string) => state.filter((req) => req.Id !== value)
+  );
   return (
     <div className="">
       {/* {optimisticRequests.map((request) => ( */}
-      {requests.map((request) => (
-        <div
-          className="flex items-center justify-between"
-          key={request.id}
-        >
+      {optimisticRequestsState.map((request) => (
+        <div className="flex items-center justify-between" key={request.id}>
           <div className="flex items-center gap-4">
             <Image
               src={
@@ -34,24 +52,32 @@ export default async function FriendRequestList({
             <span className="font-semibold">
               {request.sender.name && request.sender.surname
                 ? request.sender.name + " " + request.sender.surname
-                : request.sender.username} 
+                : request.sender.username}
             </span>
           </div>
           <div className="flex gap-3 justify-end">
-            <Image 
-            src="/accept.png"
-            alt=""
-            width={20}
-            height={20}
-            className="cursor-pointer"
-            />
-            <Image 
-            src="/reject.png"
-            alt=""
-            width={20}
-            height={20}
-            className="cursor-pointer"
-            />
+            <form action={() => acceptRequest(request.Id, request.sender.Id)}>
+              <button>
+                <Image
+                  src="/accept.png"
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="cursor-pointer"
+                />
+              </button>
+            </form>
+            <form action={() => declineRequest(request.Id, request.sender.Id)}>
+              <button>
+                <Image
+                  src="/reject.png"
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="cursor-pointer"
+                />
+              </button>
+            </form>
           </div>
         </div>
       ))}
