@@ -1,7 +1,6 @@
-import FriendRequestList from "@/components/rightMenu/FriendRequestList";
+import FriendRequestList from "../../components/rightMenu/FriendRequestList";
 import prisma from "@/lib/client";
 import { auth } from "@clerk/nextjs/server";
-import Link from "next/link";
 import React from "react";
 
 export default async function page() {
