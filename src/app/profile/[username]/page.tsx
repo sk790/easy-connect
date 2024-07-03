@@ -19,7 +19,6 @@ export default async function page({
       _count: { select: { followers: true, followings: true, posts: true } },
     },
   });
-  console.log(user);
 
   if (!user) return notFound();
   const { userId: currentUserId } = auth();
@@ -74,16 +73,16 @@ export default async function page({
                 <span className="text-sm">Posts</span>
               </div>
               <div className="flex flex-col items-center">
-                <span className="font-medium">{user._count.followers}</span>
+                <span className="font-medium">{user._count.followings}</span>
                 <span className="text-sm">Followers</span>
               </div>
               <div className="flex flex-col items-center">
-                <span className="font-medium">{user._count.followings}</span>
+                <span className="font-medium">{user._count.followers}</span>
                 <span className="text-sm">Following</span>
               </div>
             </div>
           </div>
-          <Feed />
+          <Feed username={user.username} />
         </div>
       </div>
       <div className="hidden lg:block w-[30%]">
