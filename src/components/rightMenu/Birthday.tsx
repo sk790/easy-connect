@@ -13,13 +13,13 @@ export default function Birthday() {
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-4">
         <Image
-          src="https://images.pexels.com/photos/18207381/pexels-photo-18207381/free-photo-of-window-in-bar.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load"
+          src="/demo.jpg"
           alt=""
           width={40}
           height={40}
           className="w-10 h-10 rounded-full object-cover"
         />
-        <span className="font-semibold">Wayne Burton</span>
+        <span className="font-semibold">Saurabh Nagar</span>
       </div>
       <div className="flex gap-3 justify-end">
         <button className="bg-blue-500 text-white text-xs px-2 py-1 rounded-md">
