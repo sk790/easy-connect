@@ -1,12 +1,11 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "src/**/*",
-        "use": "@vercel/node"
-      }
-    ],
-    "buildCommand": "npm install --force && npm run build",
-    "outputDirectory": "dist"
-  }
-  
+  "version": 2,
+  "builds": [
+    {
+      "src": "easy-connect/package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "buildCommand": "npm install --legacy-peer-deps && npm run build",
+  "outputDirectory": "easy-connect/out"
+}
