@@ -1,9 +1,8 @@
 "use client";
 
-import { deletePost } from "@/lib/actions";
+import { deletePost } from "../../lib/actions";
 import Image from "next/image";
 import { useState } from "react";
-import { useFormStatus } from "react-dom";
 
 export default function PostInfo({ postId }: { postId: string }) {
   const [open, setOpen] = useState(false);

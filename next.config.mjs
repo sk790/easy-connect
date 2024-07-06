@@ -4,9 +4,6 @@ const nextConfig = {
     reactCompiler: true,
     ppr: "incremental",
   },
-  alias: {
-    "@": "./src/*",
-  },
   images: {
     remotePatterns: [
       {

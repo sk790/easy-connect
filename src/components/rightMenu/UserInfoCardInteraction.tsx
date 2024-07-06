@@ -1,5 +1,5 @@
 "use client";
-import { blockUser, switchFollow } from "@/lib/actions";
+import { blockUser, switchFollow } from "../../lib/actions";
 import React, { useOptimistic, useState } from "react";
 
 export default function UserInfoCardInteraction({

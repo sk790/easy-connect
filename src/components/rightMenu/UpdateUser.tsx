@@ -4,7 +4,7 @@ import { User } from "@prisma/client";
 import React, { useActionState, useState } from "react";
 import UpdateButton from "./UpdateButton";
 import Image from "next/image";
-import { updateUserProfile } from "@/lib/actions";
+import { updateUserProfile } from "../../lib/actions";
 import { CldUploadWidget } from "next-cloudinary";
 import { useRouter } from "next/navigation";
 

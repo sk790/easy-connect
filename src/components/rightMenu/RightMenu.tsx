@@ -1,4 +1,3 @@
-import Image from "next/image";
 import FriendRequests from "./FriendRequests";
 import Birthday from "./Birthday";
 import Ad from "../Ad";

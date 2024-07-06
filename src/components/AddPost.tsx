@@ -1,5 +1,5 @@
 "use client";
-import { addPost } from "@/lib/actions";
+import { addPost } from "../lib/actions";
 import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { useState } from "react";
