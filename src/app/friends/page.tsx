@@ -1,5 +1,5 @@
 import FriendRequestList from "../../components/rightMenu/FriendRequestList";
-import prisma from "@/lib/client";
+import prisma from "../../lib/client";
 import { auth } from "@clerk/nextjs/server";
 import React from "react";
 
