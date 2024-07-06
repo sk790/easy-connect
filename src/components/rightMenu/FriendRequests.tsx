@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import FriendRequestList from "./FriendRequestList";
 import { auth } from "@clerk/nextjs/server";
-import prisma from "@/lib/client";
+import prisma from "../../lib/client";
 
 export default async function FriendRequests() {
   const { userId } = auth();

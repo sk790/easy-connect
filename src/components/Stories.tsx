@@ -1,5 +1,5 @@
 import StoryList from "./StoryList";
-import prisma from "@/lib/client";
+import prisma from "../lib/client";
 import { auth } from "@clerk/nextjs/server";
 
 const Stories = async () => {
