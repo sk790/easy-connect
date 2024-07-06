@@ -1,5 +1,5 @@
 "use client";
-import { acceptFollowRequest, declineFollowRequest } from "@/lib/actions";
+import { acceptFollowRequest, declineFollowRequest } from "../../lib/actions";
 import { FollowRequest, User } from "@prisma/client";
 import Image from "next/image";
 import React, { useOptimistic, useState } from "react";
