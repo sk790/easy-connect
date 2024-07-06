@@ -3,7 +3,6 @@ import LeftMenu from "../components/leftMenu/LeftMenu"
 import RightMenu from "../components/rightMenu/RightMenu"
 import Stories from "../components/Stories"
 import Feed from "../components/feed/Feed"
-import toast from 'react-hot-toast';
 
 const Homepage = () => {
   return (

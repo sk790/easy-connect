@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { User } from "@prisma/client";
 import { auth } from "@clerk/nextjs/server";
-import prisma from "@/lib/client";
+import prisma from "../../lib/client";
 import UpdateUser from "./UpdateUser";
 import UserInfoCardInteraction from "./UserInfoCardInteraction";
 
