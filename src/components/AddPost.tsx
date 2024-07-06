@@ -8,7 +8,6 @@ import { CldUploadWidget } from "next-cloudinary";
 
 const AddPost = () => {
   const { user, isLoaded } = useUser();
-
   const [desc, setDesc] = useState("");
   const [img, setImg] = useState<any>();
   const [imageState, setImageState] = useState(true);
@@ -16,7 +15,6 @@ const AddPost = () => {
   if (!isLoaded) {
     return "Loading...";
   }
-  let c = false;
 
   return (
     <div className="p-4 bg-white shadow-md rounded-lg flex gap-4 justify-between text-sm">
