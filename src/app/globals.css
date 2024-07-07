@@ -1,5 +1,15 @@
-@tailwind base;
-@tailwind components;
+/* @tailwind base; */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  scrollbar-width: none;
+}@tailwind components;
 @tailwind utilities;
 
 .scrollbar-hide::-webkit-scrollbar{
