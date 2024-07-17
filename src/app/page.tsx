@@ -1,8 +1,8 @@
 import AddPost from "../components/AddPost"
 import LeftMenu from "../components/leftMenu/LeftMenu"
 import RightMenu from "../components/rightMenu/RightMenu"
-import Stories from "../components/Stories"
-// import Feed from "../components/feed/Feed"
+// import Stories from "../components/Stories"
+import Feed from "../components/feed/Feed"
 
 const Homepage = () => {
   return (
@@ -12,9 +12,9 @@ const Homepage = () => {
       </div>
       <div className="w-full lg:w-[70%] xl:w-[50%]">
         <div className="flex flex-col gap-6">
-          <Stories />
+          {/* <Stories /> */}
           <AddPost />
-          {/* <Feed /> */}
+          <Feed />
         </div>
       </div>
       <div className="hidden lg:block w-[30%]">
