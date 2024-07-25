@@ -107,8 +107,8 @@ export const acceptFollowRequest = async (userId: string) => {
       await prisma.follower.create({
         data: {
           Id: Math.random().toString(),
-          followerId: userId,
-          followingId: currentUserId,
+          followerId: currentUserId,
+          followingId: userId,
         },
       });
     }
@@ -327,7 +327,7 @@ export const deletePost = async (postId: string) => {
         userId,
       },
     });
-    revalidatePath("/")
+    revalidatePath("/");
   } catch (err) {
     console.log(err);
   }

@@ -32,12 +32,10 @@ export default async function page({
       },
     });
     if (res) isBlocked = true;
-  }
-   else {
+  } else {
     isBlocked = false;
   }
   if (isBlocked) return notFound();
-  
 
   return (
     <div className="flex gap-6 pt-6">
