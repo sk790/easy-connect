@@ -60,10 +60,10 @@ export default function UserInfoCardInteraction({
         <form action={follow}>
           <button className="w-full bg-blue-500 text-white text-sm rounded-md p-2">
             {optimisticState.following
-              ? "Unfollow"
+              ? "Follow"
               : optimisticState.followingRequestSent
               ? "Friend Request Sent"
-              : "Follow"}
+              : "Unfollow"}
           </button>
         </form>
         <form action={block} className="self-end ">
