@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "react-hot-toast";
-
+import NextTopLoader from 'nextjs-toploader';
 // const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,6 +21,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body>
+        <NextTopLoader />
           <div className="px-4 w-full bg-white md:px-8 lg:px-16 xl:px-32 2xl:px-64">
             <Navbar />
           </div>
