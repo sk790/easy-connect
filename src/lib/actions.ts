@@ -14,8 +14,8 @@ export const switchFollow = async (userId: string) => {
   try {
     const existingFollow = await prisma.follower.findFirst({
       where: {
-        followerId: currentUserId,
-        followingId: userId,
+        followerId: userId,
+        followingId: currentUserId,
       },
     });
     if (existingFollow) {
