@@ -1,3 +1,4 @@
+import UserInfoCardInteraction from "@/components/rightMenu/UserInfoCardInteraction";
 import Feed from "../../../components/feed/Feed";
 import LeftMenu from "../../../components/leftMenu/LeftMenu";
 import RightMenu from "../../../components/rightMenu/RightMenu";
@@ -6,6 +7,7 @@ import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import React from "react";
+import UserInfoCard from "@/components/rightMenu/UserInfoCard";
 
 export default async function page({
   params,
@@ -79,6 +81,9 @@ export default async function page({
                 <span className="text-sm">Following</span>
               </div>
             </div>
+          </div>
+          <div className="block md:hidden">
+            <UserInfoCard user={user} />
           </div>
           <Feed username={user.username} />
         </div>

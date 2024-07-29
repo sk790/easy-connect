@@ -246,18 +246,7 @@ export const addComment = async (postId: string, desc: string) => {
   }
 };
 
-export const addPost = async (formData: FormData, img: string) => {
-  const desc = formData.get("desc") as string;
-
-  const Desc = z.string().min(1).max(300);
-
-  const validatedDesc = Desc.safeParse(desc);
-
-  if (!validatedDesc.success) {
-    //TODO
-    console.log("description is not valid");
-    return;
-  }
+export const addPost = async (formData?: FormData, img?: string) => {
   const { userId } = auth();
 
   if (!userId) throw new Error("User is not authenticated!");
@@ -266,7 +255,7 @@ export const addPost = async (formData: FormData, img: string) => {
     await prisma.post.create({
       data: {
         Id: Math.random().toString(),
-        desc: validatedDesc.data,
+        desc: formData?.get("desc") as string,
         userId,
         img,
       },

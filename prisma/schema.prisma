@@ -36,7 +36,7 @@ model User {
 model Post {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   Id        String    @unique
-  desc      String
+  desc      String?
   img       String?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
