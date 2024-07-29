@@ -1,9 +1,18 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import React, { useState } from "react";
+import { navigate } from "./navigate";
+import { getUser } from "@/lib/actions";
+import { auth, currentUser } from "@clerk/nextjs/server";
+import { useRouter } from "next/navigation";
 
 export default function MobileMenu() {
+  const navigate = useRouter();
+  const GetUser = async () => {
+    const user = await getUser();
+    navigate.push(`/profile/${user?.username}`);
+  };
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="md:hidden">
@@ -28,10 +37,13 @@ export default function MobileMenu() {
         />
       </div>
       {isOpen && (
-        <div className="absolute left-0 top-24 w-full h-[calc(100vh-96px)] bg-white flex flex-col items-center justify-center gap-8 font-medium text-xl z-10" onClick={() => setIsOpen(false)}>
+        <div
+          className="absolute left-0 top-24 w-full h-[calc(100vh-96px)] bg-white flex flex-col items-center justify-center gap-8 font-medium text-xl z-10"
+          onClick={() => setIsOpen(false)}
+        >
           <Link href="/">Home</Link>
           <Link href="/friends">Friends</Link>
-          <Link href="/">Groups</Link>
+          <div onClick={GetUser}>Profile</div>
           <Link href="/">Stories</Link>
           <Link href="/">Login</Link>
         </div>

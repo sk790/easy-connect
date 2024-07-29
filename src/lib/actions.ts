@@ -321,3 +321,21 @@ export const deletePost = async (postId: string) => {
     console.log(err);
   }
 };
+
+export const getUser = async () => {
+  const { userId: currentUserId } = auth();
+
+  if (!currentUserId) {
+    throw new Error("user not logged in");
+  }
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        Id: currentUserId,
+      },
+    });
+    return user;
+  } catch (err) {
+    console.log(err);
+  }
+};

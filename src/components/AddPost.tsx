@@ -1,12 +1,14 @@
 "use client";
-import { addPost } from "../lib/actions";
+import { addPost, getUser } from "../lib/actions";
 import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { useState } from "react";
 import AddPostButton from "./AddPostButton";
 import { CldUploadWidget } from "next-cloudinary";
+import { useRouter } from "next/navigation";
 
 const AddPost = () => {
+  const navigate = useRouter();
   const { user, isLoaded } = useUser();
   const [desc, setDesc] = useState("");
   const [img, setImg] = useState<any>();
@@ -24,6 +26,9 @@ const AddPost = () => {
         width={48}
         height={48}
         className="w-12 h-12 object-cover rounded-full"
+        onClick={() =>
+          getUser().then((user) => navigate.push(`/profile/${user?.username}`))
+        }
       />
       <div className="flex-1">
         {/* TEXT INPUT */}
@@ -87,7 +92,7 @@ const AddPost = () => {
           </div>
         </div>
         {img && (
-          <div className={`mt-5 ${imageState?"block":"hidden"}`}>
+          <div className={`mt-5 ${imageState ? "block" : "hidden"}`}>
             <Image src={img.secure_url} alt="" width={80} height={80} />
           </div>
         )}
