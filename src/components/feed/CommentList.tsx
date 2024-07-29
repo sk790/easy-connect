@@ -1,8 +1,9 @@
 "use client";
-import { addComment } from "../../lib/actions";
-import { useAuth, useUser } from "@clerk/nextjs";
+import { addComment, getUser } from "../../lib/actions";
+import { useUser } from "@clerk/nextjs";
 import { Comment, User } from "@prisma/client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useOptimistic, useState } from "react";
 
 type commentWithUser = Comment & { user: User };
@@ -22,31 +23,10 @@ export default function CommentList({
     (state, value: commentWithUser) => [value, ...state]
   );
 
+  const navigate = useRouter();
+
   const add = async () => {
     if (!user || !desc) return;
-
-    // addOptimisticComment({
-    //   Id: Math.random().toString(),
-    //   desc,
-    //   createdAt: new Date(Date.now()),
-    //   updatedAt: new Date(Date.now()),
-    //   userId: user.id,
-    //   postId: postId,
-      // user: {
-      //   Id: user.id,
-      //   username: "Sending Please Wait...",
-      //   avatar: user.imageUrl || "/noAvatar.png",
-      //   cover: "",
-      //   description: "",
-      //   name: "",
-      //   surname: "",
-      //   city: "",
-      //   work: "",
-      //   school: "",
-      //   website: "",
-      //   createdAt: new Date(Date.now())
-      // },
-    // });
     try {
       const createdComment = await addComment(postId, desc);
       setCommentState((prev) => [createdComment, ...prev]);
@@ -95,6 +75,7 @@ export default function CommentList({
               width={40}
               height={40}
               className="w-10 h-10 rounded-full"
+              onClick={() => navigate.push(`/profile/${comment.user.username}`)}
             />
             {/* DESC */}
             <div className="flex flex-col gap-2 flex-1">
