@@ -9,15 +9,14 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { navigate } from "./navigate";
-
+import { CiSearch } from "react-icons/ci";
 export default function Navbar() {
-  
   return (
     <div className="h-24 flex items-center justify-between">
       {/* LEFT */}
       <div className="md:hidden lg:block">
         <Link href="/" className="text-md md:text-xl">
-          <Image src="/logo.png" alt="Logo" width={40} height={40}/>
+          <Image src="/logo.png" alt="Logo" width={40} height={40} />
         </Link>
       </div>
       {/* CENTER */}
@@ -56,14 +55,16 @@ export default function Navbar() {
           </Link>
         </div>
         <form action={navigate}>
-          <div className="flex p-2 bg-slate-100 items-center rounded-xl">
+          <div className="flex p-2 bg-slate-100 items-center rounded-xl relative">
             <input
               type="text"
               name="search"
               placeholder="search..."
               className="bg-transparent outline-none"
             />
-            <Image src="/search.png" alt="" width={14} height={14} className="" />
+            <button type="submit">
+              <CiSearch className="w-6 text-teal-300 h-6 absolute right-2 top-1/2 -translate-y-1/2" />
+            </button>
           </div>
         </form>
       </div>
